@@ -1,16 +1,16 @@
 from typing import DefaultDict
 import ply.lex as lex
 
-#Autor: Jhossias Calderon
+#Autor: Jhossias Calderon, Gustavo Chonillo
 #Ingreso de palabras reservadas
 reserved = {
-    'as' : 'AS', 'as?' : 'as?',
+    'as' : 'AS', #'as?' : 'AS?',
     'break' : 'BREAK', 'class' : 'CLASS',
     'continue' : 'CONTINUE', 'do' : 'DO',
     'else' : 'ELSE', 'false' : 'FALSE', 'for' : 'FOR',
-    'fun' : 'FUN', 'if' : 'IF', 'in' : 'IN', '!in' : '!IN',
+    'fun' : 'FUN', 'if' : 'IF', 'in' : 'IN', #'!in' : '!IN',
     'interface' : 'INTERFACE', 'is' : 'IS',
-    '!is' : '!IS',
+    #'!is' : '!IS',
     'null' : 'NULL', 'object' : 'OBJECT',
     'package' : 'PACKAGE',
     'return' : 'RETURN', 'super' : 'SUPER', 'this' : 'THIS',
@@ -24,10 +24,10 @@ reserved = {
     'file' : 'FILE',
     'finally' : 'FINALLY', 'get' : 'GET',
     'import' : 'IMPORT', 'init' : 'INIT',
-    'param' : 'PARAM', 'property' : 'PROTERTY',
+    'param' : 'PARAM', 'property' : 'PROPERTY',
     'receiver' : 'RECEIVER', 'set' : 'SET',
     'setparam' : 'SETPARAM', 'value' : 'VALUE',
-    'where' : 'WHERE'
+    'where' : 'WHERE', 'and' : 'AND', 'or' : 'OR'
 }
 
 
@@ -41,22 +41,103 @@ tokens = (
     'DIVIDE',
     'LPAREN',
     'RPAREN',
+    'LLLAVE',
+    'RLLAVE',
+    'MAYORQUE',
+    'MENORQUE',
+    'IGUAL',
     'MOD',
     'POW',
+    # Gustavo Chonillo
+    'PUNTO',
+    'COMA',
+    'PUNTOYCOMA',
+    'DOSPUNTOS',
+    'ESIGUAL',
+    'DIFERENTE',
+    'NEGACION',
+    'LCLASP',
+    'RCLASP',
+    'INCREMENT',
+    'DECREMENT',
     #Variables
     'VARIABLE',
-
-
-)
+) + tuple(reserved.values())
 
 # Regular expression rules for simple tokens
-t_PLUS    = r'\+'
-t_MINUS   = r'-'
-t_TIMES   = r'\*'
-t_DIVIDE  = r'/'
-t_LPAREN  = r'\('
-t_RPAREN  = r'\)'
-
+t_PLUS     = r'\+'
+t_MINUS    = r'-'
+t_TIMES    = r'\*'
+t_DIVIDE   = r'/'
+t_LPAREN   = r'\('
+t_RPAREN   = r'\)'
+t_LLLAVE   = r'{'
+t_RLLAVE   = r'}'
+#Gustavo Chonillo
+t_MAYORQUE = r'>'
+t_MENORQUE = r'<'
+t_IGUAL    = r'='
+t_MOD      = r'%'
+t_PUNTO    = r'\.'
+t_COMA     = r','
+t_PUNTOYCOMA=r';'
+t_DOSPUNTOS= r':'
+t_ESIGUAL  = r'=='
+t_DIFERENTE= r'!='
+t_NEGACION = r'!'
+t_LCLASP   = r'\['
+t_RCLASP   = r'\]'
+t_INCREMENT= r'\+\+'
+t_DECREMENT= r'--'
+# RESERVADOS Gustavo Chonillo
+t_AS       = r'(as)'
+t_BREAK    = r'(break)'
+t_CLASS    = r'(class)'
+t_CONTINUE = r'(continue)'
+t_DO       = r'(do)'
+t_ELSE     = r'(else)'
+t_FALSE    = r'(false)'
+t_FOR      = r'(for)'
+t_FUN      = r'(fun)'
+t_IF       = r'(if)'
+t_IN       = r'(in)'
+t_INTERFACE= r'(interface)'
+t_IS       = r'(is)'
+t_NULL     = r'(null)'
+t_OBJECT   = r'(object)'
+t_PACKAGE  = r'(package)'
+t_RETURN   = r'(return)'
+t_SUPER    = r'(super)'
+t_THIS     = r'(this)'
+t_THROW    = r'(throw)'
+t_TRUE     = r'(true)'
+t_TRY      = r'(try)'
+t_TYPEALIAS= r'(typealias)'
+t_TYPEOF   = r'(typeof)'
+t_VAL      = r'(val)'
+t_VAR      = r'(var)'
+t_WHEN     = r'(when)'
+t_WHILE    = r'(while)'
+t_BY       = r'(by)'
+t_CATCH    = r'(catch)'
+t_CONSTRUCTOR= r'(constructor)'
+t_DELEGATE = r'(delegate)'
+t_DYNAMIC  = r'(dynamic)'
+t_FIELD    = r'(field)'
+t_FILE     = r'(file)'
+t_FINALLY  = r'(finally)'
+t_GET      = r'(get)'
+t_IMPORT   = r'(import)'
+t_INIT     = r'(init)'
+t_PARAM    = r'(param)'
+t_PROPERTY = r'(property)'
+t_RECEIVER = r'(receiver)'
+t_SET      = r'(set)'
+t_SETPARAM = r'(setparam)'
+t_VALUE    = r'(value)'
+t_WHERE    = r'(where)'
+t_AND      = r'(and)'
+t_OR       = r'(or)'
 
 #Jhossias Calderon
 #Variables
@@ -113,6 +194,13 @@ lexer = lex.lex()
 data = '''
  3 + 4 * 10
    + -20 *2 + ab
+  while (true){
+    a++
+  }
+  if (a and b){
+    return 20
+  }
+  if (a in c)
 '''
 
 # Give the lexer some input
