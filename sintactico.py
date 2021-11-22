@@ -1,7 +1,6 @@
 # Yacc example
 
 import ply.yacc as yacc
-# import lexicoProyecto
 
 # Get the token map from the lexer.  This is required.
 from lex import tokens
