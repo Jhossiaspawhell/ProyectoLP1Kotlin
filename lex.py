@@ -47,6 +47,8 @@ tokens = (
     'RLLAVE',
     'MAYORQUE',
     'MENORQUE',
+    'MAYORIGUAL',
+    'MENORIGUAL',
     'VARIABLE',
     'IGUAL',
     'MOD',
@@ -70,6 +72,8 @@ t_LPAREN = r'\('
 t_RPAREN = r'\)'
 t_MAYORQUE =  r'>'
 t_MENORQUE =  r'<'
+t_MAYORIGUAL = r'>='
+t_MENORIGUAL = r'<='
 t_MOD = r'%'
 t_IGUAL= r'='
 t_PUNTO=r'\.'
@@ -136,6 +140,7 @@ def t_error(t):
     global textoSalida
     textoSalida +="No es reconocido '%s'" % t.value[0]+"\n"
     t.lexer.skip(1)
+    return textoSalida
 
 def t_STRINGPALABRA(t):
     r'"[a-zA-Z0-9\s]*" |\'[a-zA-Z0-9\s]*\''
@@ -144,3 +149,5 @@ def t_STRINGPALABRA(t):
 # Build the lexer
 lexer = lex.lex()
 # Test it out
+
+

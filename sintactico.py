@@ -26,7 +26,10 @@ def p_todo(p):
               | readline
               | prin
               | contador
-              | retor'''
+              | retor
+              | comparacion
+              | operacion
+              | asignacion'''
 
 
 def p_repeTodoA(p):
@@ -182,6 +185,7 @@ def p_repetirCualquiera_i(p):
 
 
 # PARA COMPARAR VARIABLES Y NUMEROS
+
 def p_comparacion(p):
     'comparacion : valor operadoresComp valor'
 
@@ -190,7 +194,35 @@ def p_operadoresComp(p):
     '''operadoresComp : MAYORQUE
                         | DIFERENTE
                         | MENORQUE
-                        | ESIGUAL'''
+                        | ESIGUAL
+                        | MAYORIGUAL
+                        | MENORIGUAL'''
+
+#Operaciones
+def p_operacion(p):
+    'operacion : NUMBER operadores NUMBER'
+
+
+def p_operadores(p):
+    '''operadores : PLUS
+                    | MINUS
+                    | TIMES
+                    | DIVIDE
+                    | MOD'''
+
+#Asignación
+
+def p_adignacion(p):
+    'asignacion : VARIABLE operadoresAsig NUMBER'
+
+
+def p_operadoresAsig(p):
+    '''operadoresAsig : PLUS IGUAL
+                    | MINUS IGUAL
+                    | TIMES IGUAL
+                    | DIVIDE IGUAL
+                    | MOD IGUAL'''
+
 
 
 # Tipo de dato
