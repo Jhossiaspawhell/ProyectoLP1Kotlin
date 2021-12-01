@@ -31,7 +31,9 @@ def p_todo(p):
               | operacion
               | asignacion
               | operacionesSem
-              | boolean_operations'''
+              | boolean_operations
+              | booleans
+              '''
 
 
 def p_repeTodoA(p):
@@ -438,44 +440,73 @@ def p_semantico_boolean_op(p):
                         | FALSE AND FALSE
                         | FALSE OR FALSE
                         | TRUE IGUAL TRUE
+                        | TRUE NOIGUAL TRUE
     '''
+    global resultado
+    if p[1] == "true" and p[3] == "true":
+        p[1]=p[3]=True
+    if p[1] == "false" and p[3] == "false":
+        p[1]=p[3]=False
+    if p[1] == "true" and p[3] == "false":
+        p[1]=True
+        p[3]=False
+    if p[1] == "false" and p[3] == "true":
+        p[1]=False
+        p[3]=True
+        
     # Semantic (prueba semantica)
-    if p[2] == 'AND':
+    if p[2] == 'and':
         p[0] = p[1] and p[3]
-    elif p[2] == 'OR':
+    elif p[2] == 'or':
         p[0] = p[1] or p[3]
-    elif p[2] == 'IGUAL':
+
+    elif p[2] == '==':
         if p[1] == p[3]:
             p[0] = True
         else:
             p[0] = False
-    elif p[2] == 'NOIGUAL':
+
+    elif p[2] == '!=':
         if p[1] != p[3]:
             p[0] = True
         else:
             p[0] = False
-    elif p[2] == 'MAYORQUE':
+
+    elif p[2] == '>':
         if p[1] > p[3]:
             p[0] = True
         else:
             p[0] = False
-    elif p[2] == 'MAYORIGUAL':
+
+    elif p[2] == '>=':
         if p[1] >= p[3]:
             p[0] = True
         else:
             p[0] = False
-    elif p[2] == 'MENORQUE':
+
+    elif p[2] == '<':
         if p[1] < p[3]:
             p[0] = True
         else:
             p[0] = False
-    elif p[2] == 'MENORIGUAL':
+
+    elif p[2] == '<=':
         if p[1] <= p[3]:
             p[0] = True
         else:
             p[0] = False
-    if not isinstance(p[1], bool) and not isinstance(p[2], bool) :
-        print("Semantic error in input!")
+    resultado = "true" if p[0] else "false"
+
+
+def p_booleans(p):
+    '''booleans : TRUE
+                | FALSE'''
+#Error rule for syntax errors
+def p_error(p):
+    print("Syntax error in input!", p)
+    global resultado 
+    resultado = "expresión incorrecta"
+
 
 
 # Build the parser
