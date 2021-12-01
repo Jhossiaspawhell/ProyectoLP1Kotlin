@@ -409,6 +409,70 @@ def p_semantico_operaciones_error_num_fin(p):
     global error
     error = " Error semántico, se esperaba un número o variable antes del operador"
 
+
+#Semantico Jhossias Calderon
+def p_semantico_boolean_op(p):
+    '''boolean_operations : VARIABLE AND VARIABLE
+                        | VARIABLE OR VARIABLE
+                        | VARIABLE IGUAL VARIABLE
+                        | VARIABLE NOIGUAL VARIABLE
+                        | VARIABLE MAYORQUE VARIABLE
+                        | VARIABLE MAYORIGUAL VARIABLE
+                        | VARIABLE MENORQUE VARIABLE
+                        | VARIABLE MENORIGUAL VARIABLE
+                        | NUMBER EQUAL NUMBER
+                        | NUMBER NOIGUAL NUMBER
+                        | NUMBER MAYORQUE NUMBER
+                        | NUMBER MAYORIGUAL NUMBER
+                        | NUMBER MENORQUE NUMBER
+                        | NUMBER MENORIGUAL NUMBER
+                        | TRUE AND TRUE
+                        | TRUE OR TRUE
+                        | TRUE AND FALSE
+                        | TRUE OR FALSE
+                        | FALSE AND FALSE
+                        | FALSE OR FALSE
+                        | TRUE IGUAL TRUE
+    '''
+    # Semantic (prueba semantica)
+    if p[2] == 'AND':
+        p[0] = p[1] and p[3]
+    elif p[2] == 'OR':
+        p[0] = p[1] or p[3]
+    elif p[2] == 'IGUAL':
+        if p[1] == p[3]:
+            p[0] = True
+        else:
+            p[0] = False
+    elif p[2] == 'NOIGUAL':
+        if p[1] != p[3]:
+            p[0] = True
+        else:
+            p[0] = False
+    elif p[2] == 'MAYORQUE':
+        if p[1] > p[3]:
+            p[0] = True
+        else:
+            p[0] = False
+    elif p[2] == 'MAYORIGUAL':
+        if p[1] >= p[3]:
+            p[0] = True
+        else:
+            p[0] = False
+    elif p[2] == 'MENORQUE':
+        if p[1] < p[3]:
+            p[0] = True
+        else:
+            p[0] = False
+    elif p[2] == 'MENORIGUAL':
+        if p[1] <= p[3]:
+            p[0] = True
+        else:
+            p[0] = False
+    if not isinstance(p[1], bool) and not isinstance(p[2], bool) :
+        print("Semantic error in input!")
+
+
 # Build the parser
 parser = yacc.yacc()
 

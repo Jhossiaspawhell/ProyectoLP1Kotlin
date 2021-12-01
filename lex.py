@@ -51,6 +51,7 @@ tokens = (
     'MENORIGUAL',
     'VARIABLE',
     'IGUAL',
+    'NOIGUAL',
     'MOD',
     'PUNTOYCOMA',
     'DOSPUNTOS',
@@ -76,6 +77,7 @@ t_MAYORIGUAL = r'>='
 t_MENORIGUAL = r'<='
 t_MOD = r'%'
 t_IGUAL= r'='
+t_NOIGUAL = r'\!\='
 t_PUNTO=r'\.'
 t_PUNTOYCOMA=r';'
 t_DOSPUNTOS=r':'
