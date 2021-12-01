@@ -30,7 +30,8 @@ def p_todo(p):
               | comparacion
               | operacion
               | asignacion
-              | operacionesSem'''
+              | operacionesSem
+              | boolean_operations'''
 
 
 def p_repeTodoA(p):
