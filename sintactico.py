@@ -381,10 +381,6 @@ def p_return(p):
 
 
 
-def p_error(p):
-    global error
-    error = "Syntax error in input!\n"
-
 #semantico Gustavo Chonillo
 def p_semantico_operaciones(p):
     '''operacionesSem : VARIABLE operadores VARIABLE
@@ -501,13 +497,11 @@ def p_semantico_boolean_op(p):
 def p_booleans(p):
     '''booleans : TRUE
                 | FALSE'''
-#Error rule for syntax errors
+
+#Syntax errors
 def p_error(p):
-    print("Syntax error in input!", p)
-    global resultado 
-    resultado = "expresión incorrecta"
-
-
+    global error
+    error = "Syntax error in input!\n"
 
 # Build the parser
 parser = yacc.yacc()
