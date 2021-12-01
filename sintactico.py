@@ -125,7 +125,7 @@ def p_ConjuntoSinTipo(p):
 def p_algunTipo(p):
     '''datosprimitivos : NUMBER
               | STRINGPALABRA
-              | BOOLEANPALABRA
+              | booleanPalabra
               | VARIABLE '''
 
 
@@ -172,8 +172,12 @@ def p_repetirBool_B(p):
 
 
 def p_Bool(p):
-    '''bool : BOOLEANPALABRA
+    '''bool : booleanPalabra
        | VARIABLE'''
+
+def p_boolean_palabra(p):
+    '''booleanPalabra : TRUE
+                     | FALSE'''
 
 
 # PARA QUE SE REPITA CUALQUIERDATOPRIMITIVO
@@ -265,7 +269,7 @@ def p_for(p):
 
 ###############################################################
 def p_ifBoolean(p):
-    'ifBoolean : IF LPAREN BOOLEANPALABRA RPAREN LLLAVE  repetodo RLLAVE'
+    'ifBoolean : IF LPAREN booleanPalabra RPAREN LLLAVE  repetodo RLLAVE'
 
 
 def p_ifComparacion(p):

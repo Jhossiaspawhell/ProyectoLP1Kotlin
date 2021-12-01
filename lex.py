@@ -17,8 +17,6 @@ reserved ={
     'boolean':'BOOLEAN',
     'false' : 'FALSE', 
     'true' : 'TRUE',
-    'var':'VAR',
-    'val':'VAL',
     'fun':'FUN',
     'size': 'SIZE',
     'setof':'SETOF',
@@ -38,7 +36,6 @@ reserved ={
 tokens = (
     'NUMBER',
     'STRINGPALABRA',
-    'BOOLEANPALABRA',
     'PLUS',
     'MINUS',
     'TIMES',
@@ -117,8 +114,9 @@ t_SETOF=r'(setOf)'
 t_LISTOF=r'(listOf)'
 t_LIST=r'(List)'
 t_SET=r'(Set)'
-t_BOOLEANPALABRA=r'(True) | (False) '
 t_IN = r'(in)'
+t_TRUE = r'(true)'
+t_FALSE = r'(false)'
 
 
 # VARIABLE
