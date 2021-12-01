@@ -420,7 +420,7 @@ def p_semantico_boolean_op(p):
                         | VARIABLE MAYORIGUAL VARIABLE
                         | VARIABLE MENORQUE VARIABLE
                         | VARIABLE MENORIGUAL VARIABLE
-                        | NUMBER EQUAL NUMBER
+                        | NUMBER IGUAL NUMBER
                         | NUMBER NOIGUAL NUMBER
                         | NUMBER MAYORQUE NUMBER
                         | NUMBER MAYORIGUAL NUMBER

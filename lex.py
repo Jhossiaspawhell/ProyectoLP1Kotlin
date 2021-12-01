@@ -15,6 +15,8 @@ reserved ={
     'int':'INT',
     'String':'STRING',
     'boolean':'BOOLEAN',
+    'false' : 'FALSE', 
+    'true' : 'TRUE',
     'var':'VAR',
     'val':'VAL',
     'fun':'FUN',
