@@ -1,6 +1,0 @@
-mayor y menor igual que
--=
-+=
-*=
-/=
-%=

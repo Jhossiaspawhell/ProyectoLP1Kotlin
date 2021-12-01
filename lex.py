@@ -137,10 +137,9 @@ t_ignore = ' \t'
 
 # Error handling rule
 def t_error(t):
-    global textoSalida
-    textoSalida +="No es reconocido '%s'" % t.value[0]+"\n"
+    error = "No es reconocido '%s'" % t.value[0]
     t.lexer.skip(1)
-    return textoSalida
+    return error
 
 def t_STRINGPALABRA(t):
     r'"[a-zA-Z0-9\s]*" |\'[a-zA-Z0-9\s]*\''
@@ -150,4 +149,10 @@ def t_STRINGPALABRA(t):
 lexer = lex.lex()
 # Test it out
 
-
+def analizarLex (data):
+    lexer.input(data)
+    global textoSalida
+    textoSalida=""
+    for tok in lexer:
+        textoSalida+=str(tok)+"\n"
+    return textoSalida

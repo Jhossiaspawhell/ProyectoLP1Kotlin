@@ -7,7 +7,7 @@ from lex import tokens
 from lex import reserved
 
 textoSalida = ""  # Texto en el que se escribe la salida
-
+error="a"
 
 ##################################################
 
@@ -29,7 +29,8 @@ def p_todo(p):
               | retor
               | comparacion
               | operacion
-              | asignacion'''
+              | asignacion
+              | operacionesSem'''
 
 
 def p_repeTodoA(p):
@@ -368,24 +369,64 @@ def p_contador(p):
 
 
 def p_return(p):
-    ''' retor : RETURN VARIABLE'''
+    ''' retor : RETURN operacionesSem
+                | RETURN VARIABLE '''
+
 
 
 def p_error(p):
-    print("Syntax error in input!")
+    global error
+    error = "Syntax error in input!\n"
 
+#semantico Gustavo Chonillo
+def p_semantico_operaciones(p):
+    '''operacionesSem : VARIABLE operadores VARIABLE
+                        | STRINGPALABRA PLUS NUMBER
+                        | STRINGPALABRA PLUS STRINGPALABRA
+                        | STRINGPALABRA PLUS VARIABLE
+                        | VARIABLE PLUS STRINGPALABRA
+                        | NUMBER operadores VARIABLE
+                        | VARIABLE operadores NUMBER
+                    '''
+
+def p_semantico_operaciones_error_str_ini(p):
+    '''operacionesSem : STRINGPALABRA PLUS error'''
+    global error
+    error = " Error semántico, se esperaba una variable o número después del operador"
+
+def p_semantico_operaciones_error_str_fin(p):
+    '''operacionesSem : error PLUS STRINGPALABRA '''
+    global error
+    error = " Error semántico, se esperaba una variable antes del operador"
+
+def p_semantico_operaciones_error_num_ini(p):
+    '''operacionesSem : NUMBER operadores error'''
+    global error
+    error = " Error semántico, se esperaba un número o variable después del operador"
+
+def p_semantico_operaciones_error_num_fin(p):
+    '''operacionesSem : error operadores NUMBER'''
+    global error
+    error = " Error semántico, se esperaba un número o variable antes del operador"
 
 # Build the parser
 parser = yacc.yacc()
 
-while True:
+"""while True:
     try:
         s = input('calc > ')
     except EOFError:
         break
     if not s: continue
     result = parser.parse(s)
-    print(result)
+    print(result)"""
 
+def analizarSin(data):
+    global textoSalida, error
+    error =""
+    textoSalida = ""
+    result = parser.parse(data)
+    textoSalida+=str(result)+"\n"+error
+    return textoSalida
 
 
