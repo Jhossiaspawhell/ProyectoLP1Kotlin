@@ -33,6 +33,7 @@ def p_todo(p):
               | operacionesSem
               | boolean_operations
               | booleans
+              | operacionesComp
               '''
 
 
@@ -412,7 +413,39 @@ def p_semantico_operaciones_error_num_fin(p):
     error = " Error semántico, se esperaba un número o variable antes del operador"
 
 
-#Semantico Jhossias Calderon
+
+def p_semantico_operacionesComp(p):
+    '''operacionesComp : NUMBER operadoresComp NUMBER
+                        | NUMBER operadoresComp VARIABLE
+                        | VARIABLE operadoresComp NUMBER
+                        | VARIABLE operadoresComp VARIABLE
+                    '''
+
+def p_semantico_operacionescomp_error_str_ini(p):
+    '''operacionesComp : NUMBER operadoresComp error'''
+    global error
+    error = " Error semántico 1"
+
+def p_semantico_operacionescomp_error_str_fin(p):
+    '''operacionesComp : error operadoresComp NUMBER '''
+    global error
+    error = " Error semántico 2"
+
+def p_semantico_operacionescomp_error_num_ini(p):
+    '''operacionesComp : VARIABLE operadoresComp error'''
+    global error
+    error = " Error semántico 3"
+
+def p_semantico_operacionescomp_error_num_fin(p):
+    '''operacionesComp : error operadoresComp VARIABLE'''
+    global error
+    error = " Error semántico 4"
+
+
+
+
+
+#Jhossias Calderon
 def p_semantico_boolean_op(p):
     '''boolean_operations : VARIABLE AND VARIABLE
                         | VARIABLE OR VARIABLE
