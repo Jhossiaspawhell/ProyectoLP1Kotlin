@@ -85,7 +85,6 @@ def p_variableSinTipo(p):
 
 #################################################LISTAS#######################################################
 
-# Corregir que ingrese mas de un elemento
 def p_ListadeTipoInt(p):
     'ListaConTipo : valovar VARIABLE DOSPUNTOS LIST MENORQUE INT MAYORQUE IGUAL LISTOF LPAREN repeInt RPAREN'
 
@@ -220,7 +219,7 @@ def p_operadores(p):
 
 #Asignación
 
-def p_adignacion(p):
+def p_asignacion(p):
     'asignacion : VARIABLE operadoresAsig NUMBER'
 
 
@@ -242,7 +241,7 @@ def p_tipoDato(P):
 
 # Argumento
 def p_Argumento(P):
-    'argumento : tipoDato VARIABLE'
+    'argumento : VARIABLE DOSPUNTOS tipoDato'
 
 
 def p_repetirArgumento(p):
